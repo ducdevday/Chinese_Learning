@@ -1,0 +1,32 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-heart">💗</div>
+      <h1 class="brand-title">{{ settings().nickname }} <span class="hanzi">学中文</span></h1>
+      <p class="brand-sub">Website riêng của em yêu</p>
+    </div>
+
+    <nav class="nav">
+      @for (item of nav; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.exact }"
+          class="nav-item">
+          <span class="nav-emoji">{{ item.emoji }}</span>
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="sidebar-quote">
+      "<span class="hanzi">加油</span> jiāyóu!<br>
+      Cố lên nha {{ settings().nickname }},<br>
+      anh luôn ở đây 📣"
+    </div>
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

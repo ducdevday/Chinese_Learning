@@ -1,0 +1,99 @@
+<div class="page">
+  <header class="home-header">
+    <div>
+      <p class="date muted">{{ todayLabel }}</p>
+      <h1 class="greeting">{{ greeting() }}, {{ settings().nickname }} ơi 💗</h1>
+      <p class="muted">Hôm nay mình học thêm chút tiếng Trung nha em yêu ~</p>
+    </div>
+    <div class="stats card">
+      <div class="stat">
+        <span class="stat-emoji">🔥</span>
+        <strong>{{ progress.streak() }}</strong>
+        <span class="stat-label">ngày liên tục</span>
+      </div>
+      <div class="divider"></div>
+      <div class="stat">
+        <span class="stat-emoji">⭐</span>
+        <strong>{{ progress.learnedCount() }}</strong>
+        <span class="stat-label">từ đã học</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="card goal-card">
+    <div class="goal-head">
+      <span class="section-title">🎯 Mục tiêu hôm nay</span>
+      <span class="goal-count">{{ progress.todayCount() }} / {{ settings().dailyGoal }} từ</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" [style.width.%]="goalPercent()"></div>
+    </div>
+    @if (remaining() > 0) {
+      <p class="goal-note muted">Còn {{ remaining() }} từ nữa thôi, cố lên em yêu! 💪</p>
+    } @else {
+      <p class="goal-note done">Xong mục tiêu hôm nay rồi, em giỏi quá! 🎉</p>
+    }
+  </section>
+
+  @if (progress.dueWords().length > 0) {
+    <a class="card review-banner" routerLink="/flashcard" [queryParams]="{ mode: 'on-tap' }">
+      <span class="review-emoji">🔁</span>
+      <div>
+        <strong>Cần ôn hôm nay: {{ progress.dueWords().length }} từ</strong>
+        <p class="muted">Ôn lại chút cho nhớ lâu nha em — bấm vào đây là ôn liền!</p>
+      </div>
+      <span class="review-go">Ôn ngay →</span>
+    </a>
+  }
+
+  <div class="grid">
+    <div class="col-left">
+      <section class="card learn-next">
+        <span class="section-title">📖 Học tiếp nào em</span>
+        <div class="lesson-row">
+          <div class="lesson-icon hanzi">{{ nextLesson().lesson.icon }}</div>
+          <div class="lesson-info">
+            <h3>{{ nextLesson().lesson.title }}</h3>
+            <p class="muted">
+              {{ nextLesson().lesson.words.length }} từ vựng · {{ nextLesson().unit.level }}
+              @if (nextLesson().left > 0 && nextLesson().done > 0) {
+                · còn {{ nextLesson().left }} từ nữa là xong
+              }
+            </p>
+          </div>
+          <a class="btn-primary" [routerLink]="['/bai-hoc', nextLesson().lesson.id]">Học tiếp →</a>
+        </div>
+
+        <div class="shortcuts">
+          <a class="card-dashed shortcut" routerLink="/flashcard">
+            <span class="shortcut-emoji">🎴</span>
+            <strong>Flashcard</strong>
+            <span class="muted">Ôn {{ settings().dailyGoal }} từ hôm nay</span>
+          </a>
+          <a class="card-dashed shortcut" routerLink="/quiz">
+            <span class="shortcut-emoji">✏️</span>
+            <strong>Quiz nhanh</strong>
+            <span class="muted">5 câu · 2 phút</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <div class="col-right">
+      <section class="word-of-day">
+        <p class="wod-label">TỪ CỦA NGÀY HÔM NAY</p>
+        <div class="wod-hanzi hanzi">{{ wordOfDay.hanzi }}</div>
+        <p class="wod-pinyin">{{ wordOfDay.pinyin }}</p>
+        <p class="wod-meaning">{{ wordOfDay.meaning }}</p>
+        <button class="wod-audio" (click)="speakWordOfDay()">🔊 Nghe phát âm</button>
+      </section>
+
+      @if (settings().showLoveNotes) {
+        <section class="card-dashed love-note">
+          <span class="section-title">💌 Lời nhắn cho em</span>
+          <p class="note-text">{{ loveNote }}</p>
+        </section>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+.back {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-weight: 600;
+  &:hover { color: var(--pink-600); }
+}
+
+.lesson-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  .lesson-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: var(--pink-500);
+    color: #fff;
+    font-size: 19px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  h1 { font-size: 25px; }
+  p { margin: 4px 0 0; font-size: 14px; }
+  .progress-tag { margin-left: auto; flex-shrink: 0; }
+}
+
+.word-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.word-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 18px 24px;
+  transition: box-shadow .15s ease;
+
+  &.learned { background: linear-gradient(0deg, var(--pink-50), var(--pink-50)); }
+
+  .word-hanzi {
+    background: none;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text);
+    padding: 0;
+    min-width: 130px;
+    text-align: left;
+    transition: color .15s ease;
+    &:hover { color: var(--pink-500); }
+  }
+
+  .word-info {
+    flex: 1;
+    p { margin: 0; }
+    .pinyin { color: var(--pink-500); font-weight: 700; }
+    .meaning { margin-top: 2px; }
+    .example {
+      margin-top: 4px;
+      font-style: italic;
+      font-size: 13.5px;
+      cursor: pointer;
+      &:hover { color: var(--pink-500); }
+    }
+  }
+
+  .word-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .btn-learn {
+    background: var(--pink-100);
+    color: var(--pink-600);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background .15s ease, color .15s ease;
+
+    &:hover { background: var(--pink-150); }
+    &.on { background: var(--pink-500); color: #fff; }
+  }
+}
+
+.lesson-footer {
+  display: flex;
+  gap: 14px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+  .word-row {
+    flex-wrap: wrap;
+    gap: 10px;
+    .word-hanzi { min-width: auto; font-size: 32px; }
+  }
+}

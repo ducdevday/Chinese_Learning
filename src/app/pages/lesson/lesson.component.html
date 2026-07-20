@@ -1,0 +1,52 @@
+<div class="page">
+  @if (data(); as d) {
+    <a routerLink="/lo-trinh" class="back muted">← Về lộ trình</a>
+
+    <header class="lesson-header">
+      <div class="lesson-icon hanzi">{{ d.lesson.icon }}</div>
+      <div>
+        <h1>{{ d.lesson.title }}</h1>
+        <p class="muted">
+          {{ d.lesson.words.length }} từ vựng · {{ d.unit.level }} · bấm 🔊 để nghe phát âm nha em
+        </p>
+      </div>
+      <span class="tag progress-tag">{{ lessonStats().done }}/{{ lessonStats().total }} từ đã thuộc</span>
+    </header>
+
+    <div class="word-list">
+      @for (word of d.lesson.words; track word.hanzi) {
+        <div class="card word-row" [class.learned]="progress.isLearned(word)">
+          <button class="word-hanzi hanzi" (click)="speak(word)" title="Bấm để nghe">{{ word.hanzi }}</button>
+          <div class="word-info">
+            <p class="pinyin">{{ word.pinyin }}</p>
+            <p class="meaning">{{ word.meaning }}</p>
+            @if (word.example) {
+              <p class="example muted" (click)="speakExample(word)" title="Bấm để nghe câu ví dụ">
+                <span class="hanzi">{{ word.example.zh }}</span> — {{ word.example.vi }}
+              </p>
+            }
+          </div>
+          <div class="word-actions">
+            <button class="btn-audio" (click)="speak(word)" title="Nghe phát âm">🔊</button>
+            <button
+              class="btn-learn"
+              [class.on]="progress.isLearned(word)"
+              (click)="toggleLearned(word)">
+              {{ progress.isLearned(word) ? '✓ Đã thuộc' : 'Đã thuộc?' }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <footer class="lesson-footer">
+      <button class="btn-primary" (click)="goFlashcards()">🎴 Ôn bằng Flashcard</button>
+      <button class="btn-ghost" (click)="goQuiz()">✏️ Làm quiz bài này</button>
+      @if (nextLessonId(); as next) {
+        <a class="btn-ghost" [routerLink]="['/bai-hoc', next]">Bài tiếp theo →</a>
+      }
+    </footer>
+  } @else {
+    <p>Không tìm thấy bài học này 😢 <a routerLink="/lo-trinh">Về lộ trình</a></p>
+  }
+</div>

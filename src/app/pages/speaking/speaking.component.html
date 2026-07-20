@@ -1,0 +1,66 @@
+<div class="page">
+  <h1 class="page-title">🎤 Luyện nói</h1>
+  <p class="muted intro">Nghe mẫu, rồi bấm micro và đọc to lên. Trình duyệt sẽ nghe xem em nói có chuẩn không nha!</p>
+
+  @if (!speech.supported) {
+    <div class="card-dashed unsupported">
+      <p>😅 Trình duyệt này chưa hỗ trợ nhận diện giọng nói.</p>
+      <p class="muted">Em mở bằng <strong>Chrome</strong> hoặc <strong>Edge</strong> là dùng được liền á!</p>
+    </div>
+  } @else {
+    <div class="card speak-card">
+      <div class="mode-toggle">
+        <button class="mode-btn" [class.on]="!sentenceMode()" (click)="sentenceMode() && toggleMode()">Từ vựng</button>
+        <button
+          class="mode-btn"
+          [class.on]="sentenceMode()"
+          [disabled]="!word().example"
+          (click)="!sentenceMode() && toggleMode()">Cả câu</button>
+        <span class="streak-chip">🔥 {{ correctCount() }} câu chuẩn</span>
+      </div>
+
+      <div class="target">
+        <p class="target-hanzi hanzi">{{ target() }}</p>
+        <p class="target-pinyin">{{ sentenceMode() ? '' : word().pinyin }}</p>
+        <p class="target-meaning muted">
+          {{ sentenceMode() && word().example ? word().example!.vi : word().meaning }}
+        </p>
+      </div>
+
+      <div class="speak-actions">
+        <button class="btn-ghost" (click)="playSample()">🔊 Nghe mẫu</button>
+        @if (state() !== 'listening') {
+          <button class="mic-btn" (click)="startListening()">
+            <span class="mic-icon">🎙️</span> Bấm và nói
+          </button>
+        } @else {
+          <button class="mic-btn listening" (click)="cancelListening()">
+            <span class="mic-icon pulse">🎙️</span> Đang nghe... (bấm để hủy)
+          </button>
+        }
+        <button class="btn-ghost" (click)="nextWord()">Từ khác 🔀</button>
+      </div>
+
+      @if (state() === 'correct') {
+        <div class="result good">
+          <p class="big">Chuẩn luôn! 🎉💗</p>
+          <p class="muted">Anh nghe em nói: "<span class="hanzi">{{ heard() }}</span>"</p>
+          <button class="btn-primary" (click)="nextWord()">Từ tiếp theo →</button>
+        </div>
+      } @else if (state() === 'wrong') {
+        <div class="result bad">
+          <p class="big">Gần đúng rồi, thử lại nha 😅</p>
+          @if (heard()) {
+            <p class="muted">Anh nghe em nói: "<span class="hanzi">{{ heard() }}</span>" — còn từ cần đọc là "<span class="hanzi">{{ target() }}</span>"</p>
+          } @else {
+            <p class="muted">Anh chưa nghe rõ, em nói to hơn chút nha (nhớ cho phép dùng micro đó!)</p>
+          }
+          <div class="retry-actions">
+            <button class="btn-ghost" (click)="playSample()">🔊 Nghe lại mẫu</button>
+            <button class="btn-primary" (click)="startListening()">Thử lại 🎙️</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

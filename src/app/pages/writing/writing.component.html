@@ -1,0 +1,43 @@
+<div class="page">
+  <h1 class="page-title">🖌️ Luyện viết chữ Hán</h1>
+  <p class="muted intro">Chọn một chữ, xem thứ tự nét rồi tự viết bằng chuột. Viết đúng hết các nét là thắng!</p>
+
+  <div class="writing-grid">
+    <div class="char-picker card">
+      <span class="section-title">🈶 Chọn chữ</span>
+      <div class="char-list">
+        @for (item of chars; track item.char) {
+          <button
+            class="char-btn hanzi"
+            [class.active]="selected().char === item.char"
+            (click)="pick(item)"
+            [title]="item.word.pinyin + ' · ' + item.word.meaning">
+            {{ item.char }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="practice card">
+      <div class="word-info">
+        <span class="hanzi big-char">{{ selected().char }}</span>
+        <div>
+          <p class="pinyin">{{ selected().word.pinyin }}</p>
+          <p class="meaning muted">{{ selected().word.meaning }}</p>
+        </div>
+        <button class="btn-audio" (click)="speak()">🔊</button>
+      </div>
+
+      <div class="board-wrap" [class.quiz-mode]="status() === 'quiz'">
+        <div #target class="board"></div>
+      </div>
+
+      <p class="status-message" [class.celebrate]="status() === 'done'">{{ message() }}</p>
+
+      <div class="actions">
+        <button class="btn-ghost" (click)="animate()" [disabled]="loadError()">▶️ Xem cách viết</button>
+        <button class="btn-primary" (click)="startQuiz()" [disabled]="loadError()">✍️ Tự viết</button>
+      </div>
+    </div>
+  </div>
+</div>

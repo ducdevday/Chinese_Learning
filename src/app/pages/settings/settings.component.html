@@ -1,0 +1,27 @@
+<div class="page">
+  <h1 class="page-title">⚙️ Cài đặt</h1>
+  <p class="muted intro">Cá nhân hóa góc học tập của em nè.</p>
+
+  <div class="card settings-card">
+    <label class="field">
+      <span class="label">Biệt danh</span>
+      <input type="text" [(ngModel)]="nickname" maxlength="30" placeholder="Hồng Yến">
+    </label>
+
+    <label class="field">
+      <span class="label">Mục tiêu mỗi ngày (số từ)</span>
+      <input type="number" [(ngModel)]="dailyGoal" min="1" max="50">
+    </label>
+
+    <label class="field toggle">
+      <span class="label">Hiện lời nhắn yêu thương 💌</span>
+      <input type="checkbox" [(ngModel)]="showLoveNotes">
+      <span class="switch" [class.on]="showLoveNotes"></span>
+    </label>
+
+    <button class="btn-primary" (click)="save()">Lưu cài đặt</button>
+    @if (saved) {
+      <p class="saved-msg">Đã lưu rồi nha! 💗</p>
+    }
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="page">
+  <h1 class="page-title">🎧 Luyện nghe</h1>
+  <p class="muted intro">Nghe phát âm rồi chọn đáp án đúng. Luyện tai mỗi ngày một chút nha em!</p>
+
+  @if (!finished()) {
+    @if (current(); as q) {
+      <div class="quiz-progress">
+        <span class="muted">Câu {{ index() + 1 }} / {{ questions().length }}</span>
+        <div class="progress-track"><div class="progress-fill" [style.width.%]="percent()"></div></div>
+        <span class="score tag">{{ score() }} điểm</span>
+      </div>
+
+      <div class="card quiz-card">
+        <p class="quiz-hint muted">{{ q.promptHint }}</p>
+        <button class="listen-btn" (click)="play()">
+          <span class="listen-icon">🔊</span>
+          <span>Nghe lại</span>
+        </button>
+
+        <div class="options">
+          @for (opt of q.options; track $index) {
+            <button
+              class="option"
+              [class.hanzi]="q.optionsAreHanzi"
+              [class.correct]="selected() !== null && $index === q.correctIndex"
+              [class.wrong]="selected() === $index && $index !== q.correctIndex"
+              [disabled]="selected() !== null"
+              (click)="choose($index)">
+              {{ opt }}
+            </button>
+          }
+        </div>
+
+        @if (selected() !== null) {
+          <div class="feedback" [class.good]="selected() === q.correctIndex">
+            @if (selected() === q.correctIndex) {
+              <span>Tai thính ghê! 🎉</span>
+            } @else {
+              <span>Chưa đúng rồi 😅 Đáp án: <strong>{{ q.options[q.correctIndex] }}</strong></span>
+            }
+            <span class="word-recap">
+              <span class="hanzi">{{ q.word.hanzi }}</span> · {{ q.word.pinyin }} · {{ q.word.meaning }}
+            </span>
+            <button class="btn-primary" (click)="next()">
+              {{ index() === questions().length - 1 ? 'Xem kết quả' : 'Câu tiếp →' }}
+            </button>
+          </div>
+        }
+      </div>
+    }
+  } @else {
+    <div class="card quiz-done">
+      <div class="done-emoji">{{ scorePercent() >= 75 ? '🏆' : '🎧' }}</div>
+      <h2>{{ score() }} / {{ questions().length }} câu đúng</h2>
+      <p class="muted">{{ verdict() }}</p>
+      <div class="done-actions">
+        <button class="btn-primary" (click)="start()">Nghe tiếp 🔄</button>
+        <a class="btn-ghost" routerLink="/luyen-noi">Luyện nói 🎤</a>
+      </div>
+    </div>
+  }
+</div>

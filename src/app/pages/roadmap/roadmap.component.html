@@ -1,0 +1,35 @@
+<div class="page">
+  <h1 class="page-title">📘 Lộ trình học</h1>
+  <p class="muted intro">Đi từng bước nhỏ thôi, mỗi bài chỉ 6–10 từ. Học hết là đủ vốn giao tiếp cơ bản luôn đó em!</p>
+
+  @for (unit of vocab.units; track unit.id) {
+    <section class="unit">
+      <div class="unit-head">
+        <span class="unit-emoji">{{ unit.emoji }}</span>
+        <div>
+          <h2>{{ unit.title }}</h2>
+          <p class="muted">{{ unit.subtitle }}</p>
+        </div>
+        <span class="tag">{{ unit.level }}</span>
+      </div>
+
+      <div class="lessons">
+        @for (lesson of unit.lessons; track lesson.id) {
+          <a class="card lesson-card" [routerLink]="['/bai-hoc', lesson.id]">
+            <div class="lesson-icon hanzi">{{ lesson.icon }}</div>
+            <div class="lesson-body">
+              <h3>{{ lesson.title }}</h3>
+              <p class="muted">{{ lessonDone(lesson) }}/{{ lesson.words.length }} từ</p>
+              <div class="mini-track">
+                <div class="mini-fill" [style.width.%]="lessonPercent(lesson)"></div>
+              </div>
+            </div>
+            @if (lessonPercent(lesson) === 100) {
+              <span class="done-badge">✅</span>
+            }
+          </a>
+        }
+      </div>
+    </section>
+  }
+</div>

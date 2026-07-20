@@ -1,0 +1,95 @@
+.page-title { font-size: 28px; }
+.intro { margin: 8px 0 26px; }
+
+.writing-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.char-picker {
+  .char-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+    gap: 8px;
+    margin-top: 14px;
+    max-height: 480px;
+    overflow-y: auto;
+  }
+
+  .char-btn {
+    aspect-ratio: 1;
+    font-size: 24px;
+    background: var(--pink-50);
+    border: 2px solid var(--pink-150);
+    border-radius: 12px;
+    color: var(--text);
+    transition: border-color .15s ease, background .15s ease;
+
+    &:hover { border-color: var(--pink-400); }
+    &.active {
+      background: var(--pink-500);
+      border-color: var(--pink-500);
+      color: #fff;
+    }
+  }
+}
+
+.practice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 26px 30px;
+
+  .word-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+    margin-bottom: 18px;
+
+    .big-char { font-size: 44px; font-weight: 700; }
+    .pinyin { margin: 0; color: var(--pink-500); font-weight: 700; font-size: 17px; }
+    .meaning { margin: 0; }
+    .btn-audio { margin-left: auto; }
+  }
+
+  .board-wrap {
+    background: var(--pink-50);
+    border: 2px dashed var(--pink-200);
+    border-radius: 20px;
+    padding: 14px;
+
+    &.quiz-mode { border-color: var(--pink-400); background: #fff; }
+  }
+
+  .board {
+    width: 280px;
+    height: 280px;
+    touch-action: none;
+  }
+
+  .status-message {
+    margin: 16px 0 0;
+    font-weight: 600;
+    color: var(--text-soft);
+    text-align: center;
+    min-height: 24px;
+
+    &.celebrate {
+      color: var(--pink-600);
+      animation: pop .4s ease;
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .writing-grid { grid-template-columns: 1fr; }
+}

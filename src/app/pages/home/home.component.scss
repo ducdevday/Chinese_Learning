@@ -1,0 +1,196 @@
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 26px;
+
+  .date { margin: 0 0 4px; font-size: 14px; }
+  .greeting { font-size: 30px; }
+  p { margin: 6px 0 0; }
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 16px 26px;
+  flex-shrink: 0;
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.3;
+
+    .stat-emoji { font-size: 24px; }
+    strong { font-size: 20px; color: var(--pink-600); }
+    .stat-label { font-size: 12px; color: var(--text-soft); }
+  }
+
+  .divider { width: 1px; height: 46px; background: var(--pink-150); }
+}
+
+.goal-card { margin-bottom: 24px; }
+
+.goal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+
+  .goal-count { font-weight: 700; color: var(--pink-600); font-size: 14px; }
+}
+
+.progress-track {
+  height: 12px;
+  background: var(--pink-100);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--pink-400), var(--pink-600));
+  transition: width .4s ease;
+}
+
+.goal-note {
+  margin: 10px 0 0;
+  font-size: 14px;
+  &.done { color: var(--pink-600); font-weight: 700; }
+}
+
+.review-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  border: 2px solid var(--pink-200);
+  transition: transform .15s ease, border-color .15s ease;
+
+  &:hover { transform: translateY(-2px); border-color: var(--pink-400); }
+
+  .review-emoji { font-size: 30px; }
+  strong { font-size: 16px; }
+  p { margin: 2px 0 0; font-size: 13.5px; }
+  .review-go {
+    margin-left: auto;
+    font-weight: 700;
+    color: var(--pink-600);
+    flex-shrink: 0;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.learn-next {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--pink-50);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+
+  .lesson-icon {
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+    background: var(--pink-500);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .lesson-info {
+    flex: 1;
+    h3 { font-size: 16.5px; }
+    p { margin: 4px 0 0; font-size: 13.5px; }
+  }
+}
+
+.shortcuts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  .shortcut {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    transition: transform .15s ease, border-color .15s ease;
+
+    &:hover { transform: translateY(-2px); border-color: var(--pink-400); }
+
+    .shortcut-emoji { font-size: 22px; }
+    strong { font-size: 15.5px; }
+    span.muted { font-size: 13px; }
+  }
+}
+
+.word-of-day {
+  background: linear-gradient(150deg, var(--pink-400), var(--pink-600));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-strong);
+  color: #fff;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+
+  .wod-label {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    opacity: .85;
+  }
+
+  .wod-hanzi {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-top: 8px;
+  }
+
+  .wod-pinyin { margin: 2px 0 0; font-weight: 700; font-size: 17px; }
+  .wod-meaning { margin: 4px 0 14px; opacity: .95; }
+
+  .wod-audio {
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+    font-weight: 700;
+    padding: 9px 18px;
+    border-radius: 999px;
+    transition: background .15s ease;
+    &:hover { background: rgba(255, 255, 255, 0.34); }
+  }
+}
+
+.love-note {
+  .note-text {
+    margin: 10px 0 0;
+    font-style: italic;
+    color: var(--text-soft);
+    line-height: 1.65;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+  .home-header { flex-direction: column; }
+}

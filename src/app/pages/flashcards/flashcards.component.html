@@ -1,0 +1,48 @@
+<div class="page">
+  <h1 class="page-title">🎴 Flashcard</h1>
+  <p class="muted intro">{{ deckLabel() }} · bấm vào thẻ để lật, nghe phát âm rồi tự đánh giá nhé em.</p>
+
+  @if (!finished()) {
+    <div class="fc-progress">
+      <span class="muted">Thẻ {{ index() + 1 }} / {{ deck().length }}</span>
+      <div class="progress-track"><div class="progress-fill" [style.width.%]="percent()"></div></div>
+    </div>
+
+    @if (current(); as word) {
+      <div class="fc-stage">
+        <div class="fc-card" [class.flipped]="flipped()" (click)="flip()">
+          <div class="fc-face fc-front">
+            <span class="fc-hanzi hanzi">{{ word.hanzi }}</span>
+            <span class="fc-hint muted">Bấm để lật thẻ 👆</span>
+          </div>
+          <div class="fc-face fc-back">
+            <span class="fc-pinyin">{{ word.pinyin }}</span>
+            <span class="fc-meaning">{{ word.meaning }}</span>
+            @if (word.example) {
+              <span class="fc-example"><span class="hanzi">{{ word.example.zh }}</span><br>{{ word.example.vi }}</span>
+            }
+            <button class="btn-audio" (click)="speak($event)">🔊</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc-actions">
+        <button class="btn-forgot" (click)="answer(false)">😅 Chưa nhớ</button>
+        <button class="btn-known" (click)="answer(true)">💗 Nhớ rồi!</button>
+      </div>
+    }
+  } @else {
+    <div class="card fc-done">
+      <div class="done-emoji">🎉</div>
+      <h2>Xong bộ thẻ rồi!</h2>
+      <p class="muted">Em nhớ {{ knownCount() }}/{{ deck().length }} thẻ. Giỏi lắm luôn á!</p>
+      @if (reviewMode()) {
+        <p class="muted">Lịch ôn đã cập nhật — từ nào nhớ rồi sẽ lâu lâu mới hỏi lại 🔁</p>
+      }
+      <div class="done-actions">
+        <button class="btn-primary" (click)="restart()">Bộ thẻ mới 🔄</button>
+        <a class="btn-ghost" routerLink="/quiz">Thử quiz luôn ✏️</a>
+      </div>
+    </div>
+  }
+</div>
