@@ -82,7 +82,7 @@
     <div class="col-right">
       <section class="word-of-day">
         <p class="wod-label">TỪ CỦA NGÀY HÔM NAY</p>
-        <div class="wod-hanzi hanzi">{{ wordOfDay.hanzi }}</div>
+        <div class="wod-hanzi hanzi">{{ wordOfDay.hanzi }} @if (wordOfDay.emoji) {<span class="wod-emoji">{{ wordOfDay.emoji }}</span>}</div>
         <p class="wod-pinyin">{{ wordOfDay.pinyin }}</p>
         <p class="wod-meaning">{{ wordOfDay.meaning }}</p>
         <button class="wod-audio" (click)="speakWordOfDay()">🔊 Nghe phát âm</button>

@@ -1,256 +1,72 @@
 import { Unit, Word } from '../models';
+import { HSK1_UNITS } from './hsk1';
+import { WORD_EMOJI } from './hsk1-content';
 
-export const CURRICULUM: Unit[] = [
-  {
-    id: 'u1',
-    title: 'Unit 1 · Chào hỏi & làm quen',
-    subtitle: 'Những câu đầu tiên để bắt chuyện',
-    level: 'HSK 1',
-    emoji: '👋',
-    lessons: [
-      {
-        id: 'b1',
-        title: 'Bài 1 · Chào hỏi cơ bản',
-        icon: '你好',
-        words: [
-          { hanzi: '你好', pinyin: 'nǐ hǎo', meaning: 'Xin chào', example: { zh: '你好！', vi: 'Xin chào!' } },
-          { hanzi: '谢谢', pinyin: 'xièxie', meaning: 'Cảm ơn', example: { zh: '谢谢你！', vi: 'Cảm ơn em!' } },
-          { hanzi: '再见', pinyin: 'zàijiàn', meaning: 'Tạm biệt', example: { zh: '明天见，再见！', vi: 'Mai gặp lại, tạm biệt!' } },
-          { hanzi: '对不起', pinyin: 'duìbuqǐ', meaning: 'Xin lỗi', example: { zh: '对不起，我来晚了。', vi: 'Xin lỗi, anh đến muộn rồi.' } },
-          { hanzi: '没关系', pinyin: 'méi guānxi', meaning: 'Không sao đâu', example: { zh: '没关系，别担心。', vi: 'Không sao đâu, đừng lo.' } },
-          { hanzi: '我爱你', pinyin: 'wǒ ài nǐ', meaning: 'Anh yêu em 💗', example: { zh: '我爱你，红燕！', vi: 'Anh yêu em, Hồng Yến!' } },
-        ],
-      },
-      {
-        id: 'b2',
-        title: 'Bài 2 · Giới thiệu bản thân',
-        icon: '我是',
-        words: [
-          { hanzi: '我', pinyin: 'wǒ', meaning: 'Tôi / mình', example: { zh: '我是越南人。', vi: 'Mình là người Việt Nam.' } },
-          { hanzi: '你', pinyin: 'nǐ', meaning: 'Bạn / em', example: { zh: '你叫什么名字？', vi: 'Bạn tên là gì?' } },
-          { hanzi: '他', pinyin: 'tā', meaning: 'Anh ấy', example: { zh: '他是我朋友。', vi: 'Anh ấy là bạn của mình.' } },
-          { hanzi: '她', pinyin: 'tā', meaning: 'Cô ấy', example: { zh: '她很漂亮。', vi: 'Cô ấy rất xinh.' } },
-          { hanzi: '叫', pinyin: 'jiào', meaning: 'Tên là, gọi là', example: { zh: '我叫红燕。', vi: 'Mình tên là Hồng Yến.' } },
-          { hanzi: '名字', pinyin: 'míngzi', meaning: 'Tên', example: { zh: '你的名字很好听。', vi: 'Tên của em rất dễ nghe.' } },
-          { hanzi: '是', pinyin: 'shì', meaning: 'Là', example: { zh: '我是学生。', vi: 'Mình là học sinh.' } },
-        ],
-      },
-      {
-        id: 'b3',
-        title: 'Bài 3 · Hỏi thăm nhau',
-        icon: '好吗',
-        words: [
-          { hanzi: '吗', pinyin: 'ma', meaning: 'Trợ từ nghi vấn (…không?)', example: { zh: '你好吗？', vi: 'Em khỏe không?' } },
-          { hanzi: '很', pinyin: 'hěn', meaning: 'Rất', example: { zh: '我很好。', vi: 'Mình rất khỏe.' } },
-          { hanzi: '也', pinyin: 'yě', meaning: 'Cũng', example: { zh: '我也很好。', vi: 'Mình cũng khỏe.' } },
-          { hanzi: '呢', pinyin: 'ne', meaning: 'Còn… thì sao?', example: { zh: '你呢？', vi: 'Còn em thì sao?' } },
-          { hanzi: '忙', pinyin: 'máng', meaning: 'Bận', example: { zh: '今天你忙吗？', vi: 'Hôm nay em bận không?' } },
-          { hanzi: '累', pinyin: 'lèi', meaning: 'Mệt', example: { zh: '我不累。', vi: 'Mình không mệt.' } },
-          { hanzi: '不', pinyin: 'bù', meaning: 'Không (phủ định)', example: { zh: '我不忙。', vi: 'Mình không bận.' } },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'u2',
-    title: 'Unit 2 · Số đếm & thời gian',
-    subtitle: 'Đếm số, xem ngày, hẹn giờ',
-    level: 'HSK 1',
-    emoji: '⏰',
-    lessons: [
-      {
-        id: 'b4',
-        title: 'Bài 4 · Số đếm 1–10',
-        icon: '一二',
-        words: [
-          { hanzi: '一', pinyin: 'yī', meaning: 'Một', example: { zh: '一个人', vi: 'Một người' } },
-          { hanzi: '二', pinyin: 'èr', meaning: 'Hai', example: { zh: '二月', vi: 'Tháng hai' } },
-          { hanzi: '三', pinyin: 'sān', meaning: 'Ba', example: { zh: '三个苹果', vi: 'Ba quả táo' } },
-          { hanzi: '四', pinyin: 'sì', meaning: 'Bốn', example: { zh: '四本书', vi: 'Bốn quyển sách' } },
-          { hanzi: '五', pinyin: 'wǔ', meaning: 'Năm', example: { zh: '五点', vi: 'Năm giờ' } },
-          { hanzi: '六', pinyin: 'liù', meaning: 'Sáu', example: { zh: '六天', vi: 'Sáu ngày' } },
-          { hanzi: '七', pinyin: 'qī', meaning: 'Bảy', example: { zh: '七个朋友', vi: 'Bảy người bạn' } },
-          { hanzi: '八', pinyin: 'bā', meaning: 'Tám', example: { zh: '八块钱', vi: 'Tám đồng' } },
-          { hanzi: '九', pinyin: 'jiǔ', meaning: 'Chín', example: { zh: '九月', vi: 'Tháng chín' } },
-          { hanzi: '十', pinyin: 'shí', meaning: 'Mười', example: { zh: '十个字', vi: 'Mười chữ' } },
-        ],
-      },
-      {
-        id: 'b5',
-        title: 'Bài 5 · Ngày tháng',
-        icon: '今天',
-        words: [
-          { hanzi: '今天', pinyin: 'jīntiān', meaning: 'Hôm nay', example: { zh: '今天我很开心。', vi: 'Hôm nay mình rất vui.' } },
-          { hanzi: '明天', pinyin: 'míngtiān', meaning: 'Ngày mai', example: { zh: '明天见！', vi: 'Mai gặp nhé!' } },
-          { hanzi: '昨天', pinyin: 'zuótiān', meaning: 'Hôm qua', example: { zh: '昨天我学中文了。', vi: 'Hôm qua mình đã học tiếng Trung.' } },
-          { hanzi: '年', pinyin: 'nián', meaning: 'Năm', example: { zh: '二零二六年', vi: 'Năm 2026' } },
-          { hanzi: '月', pinyin: 'yuè', meaning: 'Tháng', example: { zh: '七月', vi: 'Tháng bảy' } },
-          { hanzi: '日', pinyin: 'rì', meaning: 'Ngày', example: { zh: '七月二十日', vi: 'Ngày 20 tháng 7' } },
-          { hanzi: '星期', pinyin: 'xīngqī', meaning: 'Tuần / thứ', example: { zh: '星期一', vi: 'Thứ hai' } },
-        ],
-      },
-      {
-        id: 'b6',
-        title: 'Bài 6 · Giờ giấc',
-        icon: '几点',
-        words: [
-          { hanzi: '点', pinyin: 'diǎn', meaning: 'Giờ', example: { zh: '现在几点？', vi: 'Bây giờ mấy giờ rồi?' } },
-          { hanzi: '分', pinyin: 'fēn', meaning: 'Phút', example: { zh: '八点十分', vi: '8 giờ 10 phút' } },
-          { hanzi: '现在', pinyin: 'xiànzài', meaning: 'Bây giờ', example: { zh: '现在我在学习。', vi: 'Bây giờ mình đang học.' } },
-          { hanzi: '上午', pinyin: 'shàngwǔ', meaning: 'Buổi sáng', example: { zh: '上午九点', vi: '9 giờ sáng' } },
-          { hanzi: '下午', pinyin: 'xiàwǔ', meaning: 'Buổi chiều', example: { zh: '下午三点', vi: '3 giờ chiều' } },
-          { hanzi: '晚上', pinyin: 'wǎnshang', meaning: 'Buổi tối', example: { zh: '晚上好！', vi: 'Chào buổi tối!' } },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'u3',
-    title: 'Unit 3 · Gia đình & bạn bè',
-    subtitle: 'Gọi tên những người thân yêu',
-    level: 'HSK 1',
-    emoji: '👨‍👩‍👧',
-    lessons: [
-      {
-        id: 'b7',
-        title: 'Bài 7 · Gia đình',
-        icon: '家人',
-        words: [
-          { hanzi: '家', pinyin: 'jiā', meaning: 'Nhà, gia đình', example: { zh: '我家有四口人。', vi: 'Nhà mình có bốn người.' } },
-          { hanzi: '爸爸', pinyin: 'bàba', meaning: 'Bố', example: { zh: '我爸爸很高。', vi: 'Bố mình rất cao.' } },
-          { hanzi: '妈妈', pinyin: 'māma', meaning: 'Mẹ', example: { zh: '妈妈做饭很好吃。', vi: 'Mẹ nấu ăn rất ngon.' } },
-          { hanzi: '哥哥', pinyin: 'gēge', meaning: 'Anh trai', example: { zh: '我有一个哥哥。', vi: 'Mình có một anh trai.' } },
-          { hanzi: '姐姐', pinyin: 'jiějie', meaning: 'Chị gái', example: { zh: '姐姐在上海。', vi: 'Chị gái đang ở Thượng Hải.' } },
-          { hanzi: '弟弟', pinyin: 'dìdi', meaning: 'Em trai', example: { zh: '弟弟今年十岁。', vi: 'Em trai năm nay mười tuổi.' } },
-          { hanzi: '妹妹', pinyin: 'mèimei', meaning: 'Em gái', example: { zh: '妹妹很可爱。', vi: 'Em gái rất đáng yêu.' } },
-        ],
-      },
-      {
-        id: 'b8',
-        title: 'Bài 8 · Bạn bè & xưng hô',
-        icon: '朋友',
-        words: [
-          { hanzi: '朋友', pinyin: 'péngyou', meaning: 'Bạn bè', example: { zh: '你是我最好的朋友。', vi: 'Em là người bạn tốt nhất của anh.' } },
-          { hanzi: '老师', pinyin: 'lǎoshī', meaning: 'Giáo viên', example: { zh: '王老师很好。', vi: 'Thầy Vương rất tốt.' } },
-          { hanzi: '学生', pinyin: 'xuésheng', meaning: 'Học sinh', example: { zh: '我们是学生。', vi: 'Chúng mình là học sinh.' } },
-          { hanzi: '同学', pinyin: 'tóngxué', meaning: 'Bạn học', example: { zh: '他是我的同学。', vi: 'Cậu ấy là bạn học của mình.' } },
-          { hanzi: '先生', pinyin: 'xiānsheng', meaning: 'Ông / ngài / anh', example: { zh: '李先生，你好！', vi: 'Chào anh Lý!' } },
-          { hanzi: '小姐', pinyin: 'xiǎojiě', meaning: 'Cô / chị (trẻ)', example: { zh: '红燕小姐很漂亮。', vi: 'Cô Hồng Yến rất xinh đẹp.' } },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'u4',
-    title: 'Unit 4 · Ăn uống',
-    subtitle: 'Đi ăn ngon cùng nhau nào',
-    level: 'HSK 1–2',
-    emoji: '🍜',
-    lessons: [
-      {
-        id: 'b9',
-        title: 'Bài 9 · Đồ ăn',
-        icon: '吃饭',
-        words: [
-          { hanzi: '吃', pinyin: 'chī', meaning: 'Ăn', example: { zh: '你想吃什么？', vi: 'Em muốn ăn gì?' } },
-          { hanzi: '饭', pinyin: 'fàn', meaning: 'Cơm, bữa ăn', example: { zh: '我们一起吃饭吧。', vi: 'Chúng mình cùng ăn cơm nhé.' } },
-          { hanzi: '米饭', pinyin: 'mǐfàn', meaning: 'Cơm trắng', example: { zh: '一碗米饭', vi: 'Một bát cơm' } },
-          { hanzi: '面条', pinyin: 'miàntiáo', meaning: 'Mì sợi', example: { zh: '我爱吃面条。', vi: 'Mình thích ăn mì.' } },
-          { hanzi: '饺子', pinyin: 'jiǎozi', meaning: 'Sủi cảo', example: { zh: '饺子很好吃。', vi: 'Sủi cảo rất ngon.' } },
-          { hanzi: '好吃', pinyin: 'hǎochī', meaning: 'Ngon', example: { zh: '这个菜真好吃！', vi: 'Món này ngon thật!' } },
-          { hanzi: '苹果', pinyin: 'píngguǒ', meaning: 'Quả táo', example: { zh: '我吃一个苹果。', vi: 'Mình ăn một quả táo.' } },
-        ],
-      },
-      {
-        id: 'b10',
-        title: 'Bài 10 · Đồ uống',
-        icon: '喝茶',
-        words: [
-          { hanzi: '喝', pinyin: 'hē', meaning: 'Uống', example: { zh: '你想喝什么？', vi: 'Em muốn uống gì?' } },
-          { hanzi: '水', pinyin: 'shuǐ', meaning: 'Nước', example: { zh: '多喝水哦！', vi: 'Nhớ uống nhiều nước nha!' } },
-          { hanzi: '茶', pinyin: 'chá', meaning: 'Trà', example: { zh: '我喜欢喝奶茶。', vi: 'Mình thích uống trà sữa.' } },
-          { hanzi: '咖啡', pinyin: 'kāfēi', meaning: 'Cà phê', example: { zh: '一杯咖啡', vi: 'Một cốc cà phê' } },
-          { hanzi: '牛奶', pinyin: 'niúnǎi', meaning: 'Sữa bò', example: { zh: '早上喝牛奶。', vi: 'Buổi sáng uống sữa.' } },
-          { hanzi: '果汁', pinyin: 'guǒzhī', meaning: 'Nước ép hoa quả', example: { zh: '苹果汁很甜。', vi: 'Nước ép táo rất ngọt.' } },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'u5',
-    title: 'Unit 5 · Mua sắm & đi lại',
-    subtitle: 'Chuẩn bị cho chuyến đi Trung Quốc',
-    level: 'HSK 2',
-    emoji: '✈️',
-    lessons: [
-      {
-        id: 'b11',
-        title: 'Bài 11 · Mua sắm',
-        icon: '买买',
-        words: [
-          { hanzi: '买', pinyin: 'mǎi', meaning: 'Mua', example: { zh: '我想买这个。', vi: 'Mình muốn mua cái này.' } },
-          { hanzi: '钱', pinyin: 'qián', meaning: 'Tiền', example: { zh: '多少钱？', vi: 'Bao nhiêu tiền?' } },
-          { hanzi: '多少', pinyin: 'duōshao', meaning: 'Bao nhiêu', example: { zh: '这个多少钱？', vi: 'Cái này bao nhiêu tiền?' } },
-          { hanzi: '贵', pinyin: 'guì', meaning: 'Đắt', example: { zh: '太贵了！', vi: 'Đắt quá!' } },
-          { hanzi: '便宜', pinyin: 'piányi', meaning: 'Rẻ', example: { zh: '便宜一点吧。', vi: 'Bớt chút đi mà.' } },
-          { hanzi: '商店', pinyin: 'shāngdiàn', meaning: 'Cửa hàng', example: { zh: '商店在哪儿？', vi: 'Cửa hàng ở đâu?' } },
-          { hanzi: '漂亮', pinyin: 'piàoliang', meaning: 'Xinh đẹp', example: { zh: '这件衣服很漂亮。', vi: 'Bộ đồ này rất đẹp.' } },
-        ],
-      },
-      {
-        id: 'b12',
-        title: 'Bài 12 · Đi lại & du lịch',
-        icon: '飞机',
-        words: [
-          { hanzi: '去', pinyin: 'qù', meaning: 'Đi (đến)', example: { zh: '我们去中国吧！', vi: 'Chúng mình đi Trung Quốc nhé!' } },
-          { hanzi: '来', pinyin: 'lái', meaning: 'Đến, tới', example: { zh: '你来我家吗？', vi: 'Em đến nhà anh không?' } },
-          { hanzi: '飞机', pinyin: 'fēijī', meaning: 'Máy bay', example: { zh: '坐飞机去北京。', vi: 'Ngồi máy bay đi Bắc Kinh.' } },
-          { hanzi: '火车', pinyin: 'huǒchē', meaning: 'Tàu hỏa', example: { zh: '火车站很大。', vi: 'Ga tàu rất to.' } },
-          { hanzi: '出租车', pinyin: 'chūzūchē', meaning: 'Taxi', example: { zh: '我们坐出租车吧。', vi: 'Mình đi taxi nhé.' } },
-          { hanzi: '哪儿', pinyin: 'nǎr', meaning: 'Ở đâu', example: { zh: '你在哪儿？', vi: 'Em đang ở đâu?' } },
-          { hanzi: '北京', pinyin: 'Běijīng', meaning: 'Bắc Kinh', example: { zh: '北京很漂亮。', vi: 'Bắc Kinh rất đẹp.' } },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'u6',
-    title: 'Unit 6 · Lời ngọt ngào 💗',
-    subtitle: 'Những câu dành riêng cho hai đứa mình',
-    level: 'Đặc biệt',
-    emoji: '💌',
-    lessons: [
-      {
-        id: 'b13',
-        title: 'Bài 13 · Lời yêu thương',
-        icon: '爱你',
-        words: [
-          { hanzi: '爱', pinyin: 'ài', meaning: 'Yêu', example: { zh: '我爱你。', vi: 'Anh yêu em.' } },
-          { hanzi: '想你', pinyin: 'xiǎng nǐ', meaning: 'Nhớ em', example: { zh: '我很想你。', vi: 'Anh nhớ em nhiều lắm.' } },
-          { hanzi: '亲爱的', pinyin: 'qīn\'ài de', meaning: 'Em yêu / anh yêu (dấu yêu)', example: { zh: '亲爱的，晚安。', vi: 'Em yêu, ngủ ngon nhé.' } },
-          { hanzi: '宝贝', pinyin: 'bǎobèi', meaning: 'Bảo bối, cục cưng', example: { zh: '宝贝，加油！', vi: 'Cục cưng, cố lên!' } },
-          { hanzi: '心', pinyin: 'xīn', meaning: 'Trái tim', example: { zh: '我的心里只有你。', vi: 'Trong tim anh chỉ có em.' } },
-          { hanzi: '开心', pinyin: 'kāixīn', meaning: 'Vui vẻ', example: { zh: '和你在一起我很开心。', vi: 'Ở bên em anh rất vui.' } },
-        ],
-      },
-      {
-        id: 'b14',
-        title: 'Bài 14 · Hẹn hò & tương lai',
-        icon: '一起',
-        words: [
-          { hanzi: '一起', pinyin: 'yìqǐ', meaning: 'Cùng nhau', example: { zh: '我们一起学中文。', vi: 'Chúng mình cùng học tiếng Trung.' } },
-          { hanzi: '约会', pinyin: 'yuēhuì', meaning: 'Hẹn hò', example: { zh: '周末我们去约会吧。', vi: 'Cuối tuần mình đi hẹn hò nhé.' } },
-          { hanzi: '牵手', pinyin: 'qiān shǒu', meaning: 'Nắm tay', example: { zh: '我想牵你的手。', vi: 'Anh muốn nắm tay em.' } },
-          { hanzi: '拥抱', pinyin: 'yōngbào', meaning: 'Ôm', example: { zh: '给我一个拥抱。', vi: 'Ôm anh một cái nào.' } },
-          { hanzi: '永远', pinyin: 'yǒngyuǎn', meaning: 'Mãi mãi', example: { zh: '我永远爱你。', vi: 'Anh yêu em mãi mãi.' } },
-          { hanzi: '幸福', pinyin: 'xìngfú', meaning: 'Hạnh phúc', example: { zh: '和你在一起很幸福。', vi: 'Bên em thật hạnh phúc.' } },
-        ],
-      },
-    ],
-  },
-];
+/** Unit đặc biệt ngoài giáo trình — những câu dành riêng cho hai đứa mình 💗 */
+const LOVE_UNIT: Unit = {
+  id: 'u-love',
+  title: 'Unit đặc biệt · Lời ngọt ngào 💗',
+  subtitle: 'Ngoài giáo trình — những câu dành riêng cho hai đứa mình',
+  level: 'Đặc biệt',
+  emoji: '💌',
+  lessons: [
+    {
+      id: 'b16',
+      title: 'Bài 16 · Lời yêu thương',
+      icon: '爱你',
+      words: [
+        { hanzi: '我爱你', pinyin: 'wǒ ài nǐ', meaning: 'Anh yêu em 💗', example: { zh: '我爱你，红燕！', vi: 'Anh yêu em, Hồng Yến!' } },
+        { hanzi: '想你', pinyin: 'xiǎng nǐ', meaning: 'Nhớ em', example: { zh: '我很想你。', vi: 'Anh nhớ em nhiều lắm.' } },
+        { hanzi: '亲爱的', pinyin: 'qīn\'ài de', meaning: 'Em yêu / anh yêu (dấu yêu)', example: { zh: '亲爱的，晚安。', vi: 'Em yêu, ngủ ngon nhé.' } },
+        { hanzi: '宝贝', pinyin: 'bǎobèi', meaning: 'Bảo bối, cục cưng', example: { zh: '宝贝，加油！', vi: 'Cục cưng, cố lên!' } },
+        { hanzi: '心', pinyin: 'xīn', meaning: 'Trái tim', example: { zh: '我的心里只有你。', vi: 'Trong tim anh chỉ có em.' } },
+        { hanzi: '开心', pinyin: 'kāixīn', meaning: 'Vui vẻ', example: { zh: '和你在一起我很开心。', vi: 'Ở bên em anh rất vui.' } },
+      ],
+    },
+    {
+      id: 'b17',
+      title: 'Bài 17 · Hẹn hò & tương lai',
+      icon: '一起',
+      words: [
+        { hanzi: '约会', pinyin: 'yuēhuì', meaning: 'Hẹn hò', example: { zh: '周末我们去约会吧。', vi: 'Cuối tuần mình đi hẹn hò nhé.' } },
+        { hanzi: '牵手', pinyin: 'qiān shǒu', meaning: 'Nắm tay', example: { zh: '我想牵你的手。', vi: 'Anh muốn nắm tay em.' } },
+        { hanzi: '拥抱', pinyin: 'yōngbào', meaning: 'Ôm', example: { zh: '给我一个拥抱。', vi: 'Ôm anh một cái nào.' } },
+        { hanzi: '永远', pinyin: 'yǒngyuǎn', meaning: 'Mãi mãi', example: { zh: '我永远爱你。', vi: 'Anh yêu em mãi mãi.' } },
+        { hanzi: '幸福', pinyin: 'xìngfú', meaning: 'Hạnh phúc', example: { zh: '和你在一起很幸福。', vi: 'Bên em thật hạnh phúc.' } },
+      ],
+    },
+  ],
+};
 
-export const ALL_WORDS: Word[] = CURRICULUM.flatMap(u => u.lessons.flatMap(l => l.words));
+export const CURRICULUM: Unit[] = [...HSK1_UNITS, LOVE_UNIT];
+
+// Gắn hình minh họa cho từ vựng
+for (const unit of CURRICULUM) {
+  for (const lesson of unit.lessons) {
+    for (const word of lesson.words) {
+      if (!word.emoji && WORD_EMOJI[word.hanzi]) {
+        word.emoji = WORD_EMOJI[word.hanzi];
+      }
+    }
+  }
+}
+
+/** Tất cả từ vựng, loại trùng theo hanzi (từ xuất hiện ở nhiều bài chỉ tính một lần) */
+export const ALL_WORDS: Word[] = (() => {
+  const seen = new Set<string>();
+  const words: Word[] = [];
+  for (const unit of CURRICULUM) {
+    for (const lesson of unit.lessons) {
+      for (const word of lesson.words) {
+        if (!seen.has(word.hanzi)) {
+          seen.add(word.hanzi);
+          words.push(word);
+        }
+      }
+    }
+  }
+  return words;
+})();
 
 export const LOVE_NOTES: string[] = [
   'Hồng Yến ơi, mỗi chữ Hán em học là một bước gần hơn tới chuyến đi Trung Quốc của tụi mình đó 🧡',

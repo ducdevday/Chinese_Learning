@@ -5,7 +5,8 @@ Website học tiếng Trung căn bản (HSK 1–2) xây dựng bằng **Angular 
 ## Tính năng
 
 - 🏠 **Trang chủ** — lời chào theo buổi, chuỗi ngày học liên tục (streak), mục tiêu từ vựng mỗi ngày, "Từ của ngày hôm nay" kèm phát âm, lời nhắn yêu thương.
-- 📘 **Lộ trình** — 6 unit / 14 bài học (~100 từ vựng HSK 1–2 + unit lời ngọt ngào), theo dõi tiến độ từng bài.
+- 📘 **Lộ trình theo Giáo trình chuẩn HSK 1** — đủ 15 bài của giáo trình (~150 từ vựng kèm pinyin, từ loại, nghĩa tiếng Việt, số trang sách) + 1 unit "Lời ngọt ngào" riêng, theo dõi tiến độ từng bài.
+- 🎧 **File nghe giáo trình** — 85 track MP3 của sách được map vào đúng bài (hội thoại 1–3, luyện phát âm, bài tập nghe). Đặt file vào `public/audio/hsk1/` với tên dạng `01-1.mp3` (thư mục này được gitignore vì file nghe có bản quyền của NXB).
 - 📖 **Bài học** — từ vựng gồm chữ Hán, pinyin, nghĩa tiếng Việt, câu ví dụ; bấm để nghe phát âm (giọng zh-CN của trình duyệt); đánh dấu "Đã thuộc".
 - 🎴 **Flashcard** — thẻ lật 3D, ưu tiên từ chưa thuộc, tự phát âm khi lật.
 - ✏️ **Quiz** — 5 câu trắc nghiệm sinh ngẫu nhiên (Hán→nghĩa, nghĩa→Hán, pinyin→nghĩa), lưu kỷ lục điểm.

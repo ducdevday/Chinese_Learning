@@ -12,6 +12,9 @@
       <div class="fc-stage">
         <div class="fc-card" [class.flipped]="flipped()" (click)="flip()">
           <div class="fc-face fc-front">
+            @if (word.emoji) {
+              <span class="fc-emoji">{{ word.emoji }}</span>
+            }
             <span class="fc-hanzi hanzi">{{ word.hanzi }}</span>
             <span class="fc-hint muted">Bấm để lật thẻ 👆</span>
           </div>

@@ -7,18 +7,99 @@
       <div>
         <h1>{{ d.lesson.title }}</h1>
         <p class="muted">
-          {{ d.lesson.words.length }} từ vựng · {{ d.unit.level }} · bấm 🔊 để nghe phát âm nha em
+          {{ d.lesson.words.length }} từ vựng · {{ d.unit.level }}
+          @if (d.lesson.bookPage) {
+            · trang {{ d.lesson.bookPage }} sách giáo khoa
+          }
+          · bấm 🔊 để nghe phát âm nha em
         </p>
       </div>
-      <span class="tag progress-tag">{{ lessonStats().done }}/{{ lessonStats().total }} từ đã thuộc</span>
+      <div class="header-side">
+        <span class="tag progress-tag">{{ lessonStats().done }}/{{ lessonStats().total }} từ đã thuộc</span>
+        @if (d.lesson.bookPage) {
+          <a
+            class="book-link"
+            [href]="'docs/hsk1.pdf#page=' + d.lesson.bookPage"
+            target="_blank"
+            rel="noopener"
+            title="Mở sách giáo khoa đúng trang bài này">
+            📕 Xem trong sách · tr. {{ d.lesson.bookPage }}
+          </a>
+        }
+      </div>
     </header>
 
+    @if (d.lesson.audio?.length) {
+      <section class="audio-section card">
+        <span class="section-title">🎧 Nghe theo sách giáo khoa</span>
+        <p class="muted audio-hint">File nghe chuẩn của giáo trình HSK 1 — nghe hội thoại trước, rồi luyện phát âm nha em.</p>
+        <div class="track-list">
+          @for (track of d.lesson.audio; track track.file) {
+            <button
+              class="track-btn"
+              [class.playing]="playingTrack() === track.file"
+              (click)="toggleTrack(track)">
+              <span class="track-icon">{{ playingTrack() === track.file ? '⏸️' : '▶️' }}</span>
+              {{ track.label }}
+            </button>
+          }
+        </div>
+      </section>
+    }
+
+    @if (warmupWords().length >= 3) {
+      <h2 class="block-title">🔥 Khởi động — nhìn hình đoán từ</h2>
+      <section class="card warmup-card">
+        <p class="muted warmup-hint">Bấm vào hình để nghe phát âm, rồi chọn từ đúng bên dưới. Ghép hết là thắng!</p>
+        <div class="warmup-images">
+          @for (word of warmupWords(); track word.hanzi) {
+            <button
+              class="warmup-img"
+              [class.selected]="warmupSelected() === word.hanzi"
+              [class.matched]="warmupMatched().has(word.hanzi)"
+              (click)="pickWarmupImage(word)">
+              <span class="img-emoji">{{ word.emoji }}</span>
+              @if (warmupMatched().has(word.hanzi)) {
+                <span class="img-answer hanzi">{{ word.hanzi }}</span>
+              } @else {
+                <span class="img-answer muted">?</span>
+              }
+            </button>
+          }
+        </div>
+        <div class="warmup-chips">
+          @for (word of warmupChips(); track word.hanzi) {
+            <button
+              class="warmup-chip hanzi"
+              [class.done]="warmupMatched().has(word.hanzi)"
+              [class.shake]="warmupWrong() === word.hanzi"
+              [disabled]="warmupMatched().has(word.hanzi)"
+              (click)="pickWarmupChip(word)">
+              {{ word.hanzi }} · {{ word.pinyin }}
+            </button>
+          }
+        </div>
+        @if (warmupDone()) {
+          <p class="warmup-win">Ghép đúng hết rồi, em giỏi quá! 🎉 <button class="btn-ghost" (click)="resetWarmup()">Chơi lại 🔄</button></p>
+        }
+      </section>
+    }
+
+    <h2 class="block-title">📚 Từ mới</h2>
     <div class="word-list">
       @for (word of d.lesson.words; track word.hanzi) {
         <div class="card word-row" [class.learned]="progress.isLearned(word)">
+          @if (word.emoji) {
+            <span class="word-emoji">{{ word.emoji }}</span>
+          }
           <button class="word-hanzi hanzi" (click)="speak(word)" title="Bấm để nghe">{{ word.hanzi }}</button>
           <div class="word-info">
-            <p class="pinyin">{{ word.pinyin }}</p>
+            <p class="pinyin">
+              {{ word.pinyin }}
+              @if (word.pos) {
+                <span class="pos-tag">{{ word.pos }}</span>
+              }
+            </p>
             <p class="meaning">{{ word.meaning }}</p>
             @if (word.example) {
               <p class="example muted" (click)="speakExample(word)" title="Bấm để nghe câu ví dụ">
@@ -38,6 +119,82 @@
         </div>
       }
     </div>
+
+    @if (d.lesson.dialogues?.length) {
+      <h2 class="block-title">💬 Hội thoại luyện tập</h2>
+      <div class="dialogue-grid">
+        @for (dialogue of d.lesson.dialogues; track dialogue.title) {
+          <section class="card dialogue-card">
+            <div class="dialogue-head">
+              <h3>{{ dialogue.title }}</h3>
+              <button class="btn-audio" (click)="speakDialogue(dialogue)" title="Nghe cả đoạn">🔊</button>
+            </div>
+            @for (line of dialogue.lines; track $index) {
+              <div class="dialogue-line" [class.speaker-b]="line.speaker === 'B'" (click)="speakLine(line)" title="Bấm để nghe">
+                <span class="speaker">{{ line.speaker }}</span>
+                <div class="bubble">
+                  <p class="line-zh hanzi">{{ line.zh }}</p>
+                  <p class="line-pinyin">{{ line.pinyin }}</p>
+                  <p class="line-vi muted">{{ line.vi }}</p>
+                </div>
+              </div>
+            }
+          </section>
+        }
+      </div>
+    }
+
+    @if (d.lesson.grammar?.length) {
+      <h2 class="block-title">📖 Ngữ pháp</h2>
+      <div class="grammar-list">
+        @for (point of d.lesson.grammar; track point.title; let i = $index) {
+          <section class="card grammar-card">
+            <h3><span class="grammar-num">{{ i + 1 }}</span> {{ point.title }}</h3>
+            <p class="grammar-explain">{{ point.explanation }}</p>
+            <div class="grammar-examples">
+              @for (ex of point.examples; track ex.zh) {
+                <p class="example muted" (click)="tts.speak(ex.zh)" title="Bấm để nghe">
+                  <span class="hanzi">{{ ex.zh }}</span> — {{ ex.vi }}
+                </p>
+              }
+            </div>
+          </section>
+        }
+      </div>
+    }
+
+    @if (cloze().length) {
+      <h2 class="block-title">✍️ Bài tập điền từ</h2>
+      <section class="card cloze-card">
+        <p class="muted cloze-hint">Chọn từ đúng điền vào chỗ trống. Làm đúng là từ đó được tính "đã thuộc" luôn nha!</p>
+        @for (q of cloze(); track q.sentence; let qi = $index) {
+          <div class="cloze-question">
+            <p class="cloze-sentence hanzi">{{ qi + 1 }}. {{ q.sentence }}</p>
+            <p class="cloze-vi muted">{{ q.vi }}</p>
+            <div class="cloze-options">
+              @for (opt of q.options; track opt; let oi = $index) {
+                <button
+                  class="cloze-opt hanzi"
+                  [class.selected]="clozeAnswers()[qi] === oi"
+                  [class.correct]="clozeChecked() && oi === q.correctIndex"
+                  [class.wrong]="clozeChecked() && clozeAnswers()[qi] === oi && oi !== q.correctIndex"
+                  (click)="pickCloze(qi, oi)">
+                  {{ opt }}
+                </button>
+              }
+            </div>
+          </div>
+        }
+        <div class="cloze-actions">
+          @if (!clozeChecked()) {
+            <button class="btn-primary" (click)="checkCloze()">Chấm điểm 📝</button>
+          } @else {
+            <p class="cloze-result">Đúng {{ clozeScore() }}/{{ cloze().length }} câu {{ clozeScore() === cloze().length ? '— tuyệt vời! 🎉' : '— ôn lại chút nha! 💪' }}</p>
+            <button class="btn-ghost" (click)="retryCloze()">Làm lại 🔄</button>
+          }
+        </div>
+      </section>
+    }
 
     <footer class="lesson-footer">
       <button class="btn-primary" (click)="goFlashcards()">🎴 Ôn bằng Flashcard</button>
